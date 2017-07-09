@@ -6,13 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -22,8 +21,35 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/', index);
-app.use('/users', users);
+
+const mqtt = require('mqtt');
+const client = mqtt.connect('mqtt://172.16.0.5');
+client.on('connect', function(state){
+    client.subscribe('/door/outer');
+    client.subscribe('/door/outer/doorbell');
+});
+
+client.on('message', function (topic, message) {
+    // message is Buffer
+    console.log(topic.toString());
+    console.log(message.toString());
+    console.log("=======");
+
+    switch (topic) {
+        case 'door/outer/doorbell':
+
+        case 'door/outer':
+
+        case 'door/test/doorbell':
+
+        default:
+          console.log("Unknown handler")
+    }
+
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
