@@ -7,16 +7,46 @@
     <title><%= title %></title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="stylesheets/style.css" rel="stylesheet">
+    <script src="angular/angular.js"></script>
+    <script src="angular-route/angular-route.js"></script>
+    <script src="socket.io-client/dist/socket.io.js"></script>
+    <script src="angular-animate/angular-animate.js"></script>
+    <script src="/javascripts/angularApp.js"></script>
 </head>
 <body>
 
-<div class="container">
-    <h1>WELCOME TO</h1>
-    <img src="images/logo.png"/>
+<!-- App starts here, everything in this div is part of the app. The controller AppCtrl is on this element too.-->
+<div ng-app="app"
+     ng-controller="AppCtrl">
+
+    <div class="app">
+        <!-- Loop through all the screens we have in our screens object. Set colours accordingly. -->
+        <div ng-repeat="(i, screen) in screens"
+             ng-repeat-finished="done()"
+             ng-show="(currentScreenIndex == i) && !animationHide"
+             class="screen"
+             style="
+                background:{{screens[currentScreenIndex].colours.background}};
+                color:{{screens[currentScreenIndex].colours.foreground}};">
+
+            <!-- include the relevant template defined by the name property. -->
+            <ng-include src="'/templates/'+ screen.name + '.tpl.html'"></ng-include>
+
+        </div>
+    </div>
+
+    <!-- Notification here - shows when there is a text notification -->
+    <div class="notification"
+         ng-show="notification.length > 0">
+        <div class="content" ng-class="{
+            'info': notificationLevel == 0,
+            'warning': notificationLevel == 1,
+            'danger': notificationLevel == 2
+        }">{{notification}}</div>
+    </div>
+
 </div>
 
-
-<meta http-equiv="refresh" content="3;url=001_train" />
 </body>
 </html>
 

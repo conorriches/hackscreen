@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
+//var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -23,33 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/', index);
-
-const mqtt = require('mqtt');
-const client = mqtt.connect('mqtt://172.16.0.5');
-client.on('connect', function(state){
-    client.subscribe('/door/outer');
-    client.subscribe('/door/outer/doorbell');
-});
-
-client.on('message', function (topic, message) {
-    // message is Buffer
-    console.log(topic.toString());
-    console.log(message.toString());
-    console.log("=======");
-
-    switch (topic) {
-        case 'door/outer/doorbell':
-
-        case 'door/outer':
-
-        case 'door/test/doorbell':
-
-        default:
-          console.log("Unknown handler")
-    }
-
-});
-
+app.use('/', express.static(__dirname + '/node_modules/'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

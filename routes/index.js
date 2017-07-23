@@ -1,18 +1,15 @@
 var express = require('express');
 var router = express.Router();
+var http = require('http');
+var DomParser = require('dom-parser');
+
 
 /* GET home page. */
 router.get('/:page', function(req, res, next) {
 
-  switch(req.params.page){
-      case "001_train":
-      case "002_metrolink":
-      case "003_bus":
-      case "004_time":
-      case "notification":
-      default:
+
           res.render(req.params.page, { title: 'Express' });
-  }
+
 
 });
 
@@ -21,5 +18,27 @@ router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
 
+var getPage = function(host, path, callback){
+    var options = {
+        host: host,
+        path: path
+    };
+
+    var req = http.get(options, function(res) {
+        var bodyChunks = [];
+        res.on('data', function(chunk) {
+            bodyChunks.push(chunk);
+        }).on('end', function() {
+            var body = Buffer.concat(bodyChunks);
+            callback(body);
+        })
+    });
+
+    req.on('error', function(e) {
+        console.log('ERROR: ' + e.message);
+    });
+
+
+};
 module.exports = router;
 

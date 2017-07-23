@@ -20,7 +20,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-
+var io = require('socket.io')(server);
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -28,6 +28,41 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+
+io.sockets.on('connection', function(socket) {
+    console.log('Client has connected on socket ' + socket.id);
+
+
+    /**
+     * When a user chooses a side, add them to the game.
+     * Then update the model and broadcast it.
+     */
+    socket.on('add-client', function(side) {
+
+    });
+
+});
+
+const mqtt = require('mqtt');
+const client = mqtt.connect('mqtt://172.16.0.5');
+
+client.on('connect', function(state){
+    client.subscribe('/door/outer');
+    client.subscribe('/door/outer/opened/username');
+    client.subscribe('/door/outer/doorbell');
+});
+
+
+client.on('message', function (topic, message) {
+
+    io.sockets.emit('notification', {
+        topic : topic.toString(),
+        message : message.toString()
+    });
+
+});
+
 
 /**
  * Normalize a port into a number, string, or false.
