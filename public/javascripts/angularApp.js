@@ -49,7 +49,7 @@ app.config(['$httpProvider', function($httpProvider) {
 app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scope, sharedService, socket) {
     $scope.screens = [
         {
-            order: 3,
+            order: 2,
             name: "food_order",
             colours: {
                 foreground: "#FED74C",
@@ -58,7 +58,7 @@ app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scop
             time: 15
         },
         {
-            order: 2,
+            order: 0,
             name: "index",
             colours: {
                 foreground: "#000000",
@@ -76,7 +76,7 @@ app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scop
             time: 10
         },
         {
-            order: 0,
+            order: 3,
             name: "metrolink",
             colours: {
                 foreground: "#FED74C",
