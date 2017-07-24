@@ -46,7 +46,7 @@ app.config(['$httpProvider', function($httpProvider) {
 ]);
 
 
-app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scope, sharedService, socket) {
+app.controller('AppCtrl', ['$scope', '$timeout','mySharedService', 'socket', function ($scope, $timeout, sharedService, socket) {
     $scope.screens = [
         {
             order: 2,
@@ -91,16 +91,15 @@ app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scop
     $scope.notification = "";
     $scope.notificationTimeout;
     $scope.notificationLevel = NOTIF_INFO;
-    $scope.doorStatus = true; //closed
+    $scope.doorStatus = false; //closed
 
     $scope.setNotification = function(content, level){
-        $scope.$apply(function(){
-            $scope.notification = content;
-            $scope.notificationLevel = level;
-        });
+        $scope.notification = content;
+        $scope.notificationLevel = level;
 
-        clearTimeout($scope.notificationTimeout);
-        $scope.notificationTimeout = setTimeout(function () {
+
+        $timeout.cancel($scope.notificationTimeout);
+        $scope.notificationTimeout = $timeout(function () {
             $scope.$apply(function(){
                $scope.notification = "";
                $scope.notificationLevel = NOTIF_INFO;
@@ -130,7 +129,7 @@ app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scop
         sharedService.prepForBroadcast($scope.screens[indexTo].name);
 
         //wait for anim, then change colours and fade in
-        setTimeout(function(){
+        $timeout(function(){
             $scope.$apply(function(){
                 $scope.currentScreenIndex = indexTo;
                 $scope.animationHide = false;
@@ -151,7 +150,7 @@ app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scop
         var timeToShowFor = $scope.screens[indexToShow].time;
 
         $scope.transitionScreens(indexToShow, function(){
-            setTimeout(function(){
+            $timeout(function(){
                 var next = ($scope.currentScreenIndex === $scope.screens.length -1) ? 0 : $scope.currentScreenIndex + 1;
                 $scope.$apply(function(){$scope.showScreen(next)});
             }, (timeToShowFor * 1000));
