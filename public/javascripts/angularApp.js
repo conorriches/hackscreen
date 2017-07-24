@@ -97,7 +97,7 @@ app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scop
         $scope.$apply(function(){
             $scope.notification = content;
             $scope.notificationLevel = level;
-        };
+        });
 
         clearTimeout($scope.notificationTimeout);
         $scope.notificationTimeout = setTimeout(function () {
