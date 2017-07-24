@@ -58,7 +58,7 @@ app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scop
             time: 15
         },
         {
-            order: 0,
+            order: 2,
             name: "index",
             colours: {
                 foreground: "#000000",
@@ -72,6 +72,15 @@ app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scop
             colours: {
                 foreground: "#ff0000",
                 background: "#660000"
+            },
+            time: 10
+        },
+        {
+            order: 0,
+            name: "metrolink",
+            colours: {
+                foreground: "#FED74C",
+                background: "#333333"
             },
             time: 10
         }
@@ -169,7 +178,7 @@ app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scop
 
     $scope.init();
     $scope.showScreen();
-    $scope.setNotification("Ding Dong! That's the doorbell!", NOTIF_DANGER);
+    $scope.setNotification("HELLO WORLD! I LIVE!", NOTIF_DANGER);
 
 
 
@@ -189,6 +198,14 @@ app.controller('IndexCtrl', ['$rootScope', '$scope', 'mySharedService', function
 
 app.controller('FoodOrderCtrl', ['$rootScope', '$scope', '$http', 'mySharedService', function ($rootScope, $scope, $http, sharedService) {
 
+}]);
+
+app.controller('MetrolinkCtrl', ['$rootScope', '$scope', '$http', 'mySharedService', function ($rootScope, $scope, $http, sharedService) {
+    $scope.$on('handleBroadcast', function() {
+
+        if(sharedService.message !== 'metrolink') return 0;
+        $scope.$emit('metrolink', true);
+    });
 }]);
 
 app.controller('TimeCtrl', ['$rootScope', '$scope', '$http', 'mySharedService', function ($rootScope, $scope, $http, sharedService) {

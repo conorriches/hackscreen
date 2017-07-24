@@ -33,13 +33,8 @@ server.on('listening', onListening);
 io.sockets.on('connection', function(socket) {
     console.log('Client has connected on socket ' + socket.id);
 
-
-    /**
-     * When a user chooses a side, add them to the game.
-     * Then update the model and broadcast it.
-     */
-    socket.on('add-client', function(side) {
-
+    socket.on('metrolink', function(data){
+        //TODO: make this work. Then GET request from TFGM. Then parse. Then send data back to client.
     });
 
 });
@@ -60,6 +55,7 @@ client.on('message', function (topic, message) {
         topic : topic.toString(),
         message : message.toString()
     });
+
 
 });
 
