@@ -97,13 +97,10 @@ app.controller('AppCtrl', ['$scope', '$timeout','mySharedService', 'socket', fun
         $scope.notification = content;
         $scope.notificationLevel = level;
 
-
         $timeout.cancel($scope.notificationTimeout);
         $scope.notificationTimeout = $timeout(function () {
-            $scope.$apply(function(){
-               $scope.notification = "";
-               $scope.notificationLevel = NOTIF_INFO;
-            })
+           $scope.notification = "";
+           $scope.notificationLevel = NOTIF_INFO;
         }, 10000)
     };
 
@@ -112,9 +109,7 @@ app.controller('AppCtrl', ['$scope', '$timeout','mySharedService', 'socket', fun
      * @param status evaluated, truthy means open
      */
     $scope.setDoor = function(status){
-        $scope.$apply(function(){
-            $scope.doorStatus = !!status;
-        });
+        $scope.doorStatus = !!status;
     };
 
     /**
@@ -130,13 +125,9 @@ app.controller('AppCtrl', ['$scope', '$timeout','mySharedService', 'socket', fun
 
         //wait for anim, then change colours and fade in
         $timeout(function(){
-            $scope.$apply(function(){
-                $scope.currentScreenIndex = indexTo;
-                $scope.animationHide = false;
-            });
-
+            $scope.currentScreenIndex = indexTo;
+            $scope.animationHide = false;
             callback();
-
         },1000);
 
     };
@@ -152,7 +143,7 @@ app.controller('AppCtrl', ['$scope', '$timeout','mySharedService', 'socket', fun
         $scope.transitionScreens(indexToShow, function(){
             $timeout(function(){
                 var next = ($scope.currentScreenIndex === $scope.screens.length -1) ? 0 : $scope.currentScreenIndex + 1;
-                $scope.$apply(function(){$scope.showScreen(next)});
+                $scope.showScreen(next);
             }, (timeToShowFor * 1000));
         })
 
@@ -174,25 +165,29 @@ app.controller('AppCtrl', ['$scope', '$timeout','mySharedService', 'socket', fun
      */
     socket.on('notification', function(data) {
 
-        switch(data.topic){
-            case 'door/outer/opened/username':
-                $scope.setNotification(data.message + " has entered!", NOTIF_WARN);
-                break;
-            case 'door/outer/doorbell':
-                $scope.setNotification("Ding Dong! That's the doorbell!", NOTIF_DANGER);
-                break;
-            case 'door/outer':
-                if(data.message === 'opened'){
-                    $scope.setDoor(true);
-                }
-                if(data.message === 'closed'){
-                    $scope.setDoor(false);
-                }
-                break;
-            default:
+        $scope.$apply(function(){
+            switch(data.topic){
+                case 'door/outer/opened/username':
+                    $scope.setNotification(data.message + " has entered!", NOTIF_WARN);
+                    break;
+                case 'door/outer/doorbell':
+                    $scope.setNotification("Ding Dong! That's the doorbell!", NOTIF_DANGER);
+                    break;
+                case 'door/outer':
+                    if(data.message === 'opened'){
+                        $scope.setDoor(true);
+                    }
+                    if(data.message === 'closed'){
+                        $scope.setDoor(false);
+                    }
+                    break;
+                default:
+
+            }
+        });
 
 
-        }
+
 
     });
 
