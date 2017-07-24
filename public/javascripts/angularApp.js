@@ -52,8 +52,8 @@ app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scop
             order: 2,
             name: "food_order",
             colours: {
-                foreground: "#FED74C",
-                background: "#333333"
+                foreground: "#bd08fe",
+                background: "#141b33"
             },
             time: 15
         },
