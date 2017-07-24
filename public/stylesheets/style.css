@@ -1,3 +1,9 @@
+
+@font-face {
+  font-family: metrolink;
+  src: url(/fonts/PantographSans-Regular.ttf);
+}
+
 html{
   height:100%;
 }
@@ -92,4 +98,9 @@ h2{
   border-radius:10px;
   width:400px;
   margin:0 auto;
+}
+
+
+.metrolink{
+  font-family:metrolink;
 }
