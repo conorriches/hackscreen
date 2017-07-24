@@ -94,8 +94,10 @@ app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scop
     $scope.doorStatus = true; //closed
 
     $scope.setNotification = function(content, level){
-        $scope.notification = content;
-        $scope.notificationLevel = level;
+        $scope.$apply(function(){
+            $scope.notification = content;
+            $scope.notificationLevel = level;
+        };
 
         clearTimeout($scope.notificationTimeout);
         $scope.notificationTimeout = setTimeout(function () {
@@ -111,7 +113,9 @@ app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scop
      * @param status evaluated, truthy means open
      */
     $scope.setDoor = function(status){
-        $scope.doorStatus = !!status;
+        $scope.$apply(function(){
+            $scope.doorStatus = !!status;
+        });
     };
 
     /**
