@@ -161,7 +161,7 @@ app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scop
                 $scope.setNotification("Ding Dong! That's the doorbell!", NOTIF_DANGER);
                 break;
             default:
-                $scope.setNotification(data.topic + ": " + data.message, NOTIF_INFO);
+                //$scope.setNotification(data.topic + ": " + data.message, NOTIF_INFO);
 
         }
 
