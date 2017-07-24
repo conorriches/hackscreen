@@ -91,6 +91,7 @@ app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scop
     $scope.notification = "";
     $scope.notificationTimeout;
     $scope.notificationLevel = NOTIF_INFO;
+    $scope.doorStatus = true; //closed
 
     $scope.setNotification = function(content, level){
         $scope.notification = content;
@@ -103,6 +104,14 @@ app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scop
                $scope.notificationLevel = NOTIF_INFO;
             })
         }, 10000)
+    };
+
+    /**
+     * Sets the door status.
+     * @param status evaluated, truthy means open
+     */
+    $scope.setDoor = function(status){
+        $scope.doorStatus = !!status;
     };
 
     /**
@@ -169,8 +178,16 @@ app.controller('AppCtrl', ['$scope','mySharedService', 'socket', function ($scop
             case 'door/outer/doorbell':
                 $scope.setNotification("Ding Dong! That's the doorbell!", NOTIF_DANGER);
                 break;
+            case 'door/outer':
+                if(data.message === 'opened'){
+                    $scope.setDoor(true);
+                }
+                if(data.message === 'closed'){
+                    $scope.setDoor(false);
+                }
+                break;
             default:
-                //$scope.setNotification(data.topic + ": " + data.message, NOTIF_INFO);
+
 
         }
 

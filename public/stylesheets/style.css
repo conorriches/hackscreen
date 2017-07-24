@@ -6,6 +6,7 @@
 
 html{
   height:100%;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 body{
@@ -89,8 +90,20 @@ h2{
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85032', endColorstr='#e73827',GradientType=0 ); /* IE6-9 */
 }
 
+.doorStatus{
+  background:black;
+  border:2px solid white;
+  position:absolute;
+  right:30px;
+  bottom:30px;
+  padding:10px;
+  color:white;
+}
 
-
+.doorStatus.open{
+  color:black;
+  background:red;
+}
 
 .time{
   background:black;

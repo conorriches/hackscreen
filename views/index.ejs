@@ -45,6 +45,11 @@
         }">{{notification}}</div>
     </div>
 
+    <div class="doorStatus" ng-class="{
+    'open': doorStatus
+    }">
+        {{doorStatus?"OPEN":"CLOSED"}}
+    </div>
 </div>
 
 </body>
