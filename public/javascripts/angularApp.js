@@ -58,7 +58,7 @@ app.controller('AppCtrl', ['$scope', '$timeout','mySharedService', 'socket', fun
             time: 15
         },
         {
-            order: 0,
+            order: 011,
             name: "index",
             colours: {
                 foreground: "#000000",
@@ -83,6 +83,15 @@ app.controller('AppCtrl', ['$scope', '$timeout','mySharedService', 'socket', fun
                 background: "#333333"
             },
             time: 10
+        },
+        {
+            order: 0,
+            name: "mmmm",
+            colours: {
+                foreground: "#171433",
+                background: "#a9a9a9"
+            },
+            time: 20
         }
     ];
     $scope.currentScreenIndex = 1;
@@ -91,7 +100,10 @@ app.controller('AppCtrl', ['$scope', '$timeout','mySharedService', 'socket', fun
     $scope.notification = "";
     $scope.notificationTimeout;
     $scope.notificationLevel = NOTIF_INFO;
+    $scope.lastMembers = [];
+
     $scope.doorStatus = false; //closed
+    $scope.doorLeftOpenPromise;
 
     $scope.setNotification = function(content, level){
         $scope.notification = content;
@@ -169,13 +181,20 @@ app.controller('AppCtrl', ['$scope', '$timeout','mySharedService', 'socket', fun
             switch(data.topic){
                 case 'door/outer/opened/username':
                     $scope.setNotification(data.message + " has entered!", NOTIF_WARN);
+                    $scope.lastMembers.push(data.message);
+                    if($scope.lastMembers.length > 5){
+                        $scope.lastMembers.shift();
+                    }
                     break;
                 case 'door/outer/doorbell':
-                    $scope.setNotification("Ding Dong! That's the doorbell!", NOTIF_DANGER);
+                    $scope.setNotification("Doorbell! Doorbell!", NOTIF_DANGER);
                     break;
                 case 'door/outer':
                     if(data.message === 'opened'){
                         $scope.setDoor(true);
+                        $scope.doorLeftOpenPromise = $timeout(function(){
+
+                        },2000);
                     }
                     if(data.message === 'closed'){
                         $scope.setDoor(false);

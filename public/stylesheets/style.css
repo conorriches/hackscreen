@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Zilla+Slab');
 
 @font-face {
   font-family: metrolink;
   src: url(/fonts/PantographSans-Regular.ttf);
 }
+
 
 html{
   height:100%;
@@ -102,8 +104,12 @@ h2{
   bottom:30px;
   padding:10px;
   color:white;
-  animation: example 200s infinite;
+  animation: example 200s infinite linear;
   width:200px;
+
+  background: linear-gradient(270deg, #000000, #0030a7);
+  background-size: 100% 100%;
+
 }
 
 
@@ -111,39 +117,61 @@ h2{
   0% {
     transform: rotate(0deg);
     right: 0px;
+    bottom:0;
   }
 
   25% {
     transform: rotate(20deg);
-    right: 0px;
+    right: 0;
+    bottom:100px;
   }
   50% {
-    transform: rotate(0deg);
-    right: 500px;
-    bottom:100px;
+    transform: rotate(-3deg);
+    right: 200px;
   }
 
   55% {
-    transform: rotate(0deg);
-    right: 400px;
+    transform: rotate(2deg);
+    bottom:200px;
   }
 
   70% {
-    transform: rotate(0deg);
+    transform: rotate(-40deg);
     bottom:200px;
   }
 
   100% {
-    transform: rotate(-360deg);
+    transform: rotate(0deg);
     right:0;
+    bottom:0;
   }
 }
 
+@-webkit-keyframes DoorOpenBgAnim {
+  0%{background-position:0% 55%}
+  50%{background-position:100% 46%}
+  100%{background-position:0% 55%}
+}
+@-moz-keyframes DoorOpenBgAnim {
+  0%{background-position:0% 55%}
+  50%{background-position:100% 46%}
+  100%{background-position:0% 55%}
+}
+@keyframes DoorOpenBgAnim {
+  0%{background-position:0% 55%}
+  50%{background-position:100% 46%}
+  100%{background-position:0% 55%}
+}
 
 
 .doorStatus.open{
-  color:black;
-  background:red;
+  color:yellow;
+  background: linear-gradient(283deg, #ff0000, #e3ff00);
+  background-size: 400% 400%;
+
+  -webkit-animation: DoorOpenBgAnim 6s ease infinite;
+  -moz-animation: DoorOpenBgAnim 6s ease infinite;
+  animation: DoorOpenBgAnim 6s ease infinite;
 }
 
 .time{
@@ -157,4 +185,8 @@ h2{
 
 .metrolink{
   font-family:metrolink;
+}
+
+.mmmm{
+  font-family: 'Zilla Slab', serif;
 }
