@@ -98,7 +98,44 @@ h2{
   bottom:30px;
   padding:10px;
   color:white;
+  animation: example 90s infinite;
+  width:200px;
 }
+
+
+@keyframes example {
+  0% {
+    transform: rotate(0deg);
+    right: 0px;
+  }
+
+  25% {
+    transform: rotate(20deg);
+    right: 0px;
+  }
+  50% {
+    transform: rotate(0deg);
+    right: 500px;
+    bottom:100px;
+  }
+
+  55% {
+    transform: rotate(0deg);
+    right: 500px;
+  }
+
+  70% {
+    transform: rotate(0deg);
+    bottom:200px;
+  }
+
+  100% {
+    transform: rotate(-360deg);
+    right:0;
+  }
+}
+
+
 
 .doorStatus.open{
   color:black;
