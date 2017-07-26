@@ -85,13 +85,22 @@ app.controller('AppCtrl', ['$scope', '$timeout','mySharedService', 'socket', fun
             time: 10
         },
         {
-            order: 0,
+            order: 03,
             name: "mmmm",
             colours: {
                 foreground: "#171433",
                 background: "#a9a9a9"
             },
             time: 20
+        },
+        {
+            order: 0,
+            name: "latest_members",
+            colours: {
+                foreground: "#f7811b",
+                background: "#170062"
+            },
+            time: 10
         }
     ];
     $scope.currentScreenIndex = 1;

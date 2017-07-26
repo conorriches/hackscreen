@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Zilla+Slab');
-
+@import url('https://fonts.googleapis.com/css?family=Artifika|Zilla+Slab');
 @font-face {
   font-family: metrolink;
   src: url(/fonts/PantographSans-Regular.ttf);
@@ -189,4 +188,8 @@ h2{
 
 .mmmm{
   font-family: 'Zilla Slab', serif;
+}
+
+.latestmembers{
+  font-family: 'Artifika', serif;
 }
