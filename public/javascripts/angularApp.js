@@ -46,7 +46,7 @@ app.config(['$httpProvider', function($httpProvider) {
 ]);
 
 
-app.controller('AppCtrl', ['$scope', '$timeout','mySharedService', 'socket', function ($scope, $timeout, sharedService, socket) {
+app.controller('AppCtrl', ['$scope', '$timeout', '$filter', 'mySharedService', 'socket', function ($scope, $timeout, $filter, sharedService, socket) {
     $scope.screens = [
         {
             order: 2,
@@ -190,7 +190,8 @@ app.controller('AppCtrl', ['$scope', '$timeout','mySharedService', 'socket', fun
             switch(data.topic){
                 case 'door/outer/opened/username':
                     $scope.setNotification(data.message + " has entered!", NOTIF_WARN);
-                    $scope.lastMembers.push(data.message);
+                    var now = $filter('date')(new Date(), "hh:mm");
+                    $scope.lastMembers.push(data.message + " at " + now);
                     if($scope.lastMembers.length > 5){
                         $scope.lastMembers.shift();
                     }
@@ -234,8 +235,6 @@ app.controller('IndexCtrl', ['$rootScope', '$scope', 'mySharedService', function
         if(sharedService.message !== 'index') return 0;
 
     });
-
-
 
 }]);
 
