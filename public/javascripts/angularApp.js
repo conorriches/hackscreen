@@ -190,7 +190,7 @@ app.controller('AppCtrl', ['$scope', '$timeout', '$filter', 'mySharedService', '
             switch(data.topic){
                 case 'door/outer/opened/username':
                     $scope.setNotification(data.message + " has entered!", NOTIF_WARN);
-                    var now = $filter('date')(new Date(), "HH:mm");
+                    var now = $filter('date')(new Date(), "yyyy-MM-dd HH:mm");
                     $scope.lastMembers.push(data.message + " at " + now);
                     if($scope.lastMembers.length > 5){
                         $scope.lastMembers.shift();
