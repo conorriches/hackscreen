@@ -58,7 +58,7 @@ app.controller('AppCtrl', ['$scope', '$timeout','mySharedService', 'socket', fun
             time: 15
         },
         {
-            order: 011,
+            order: 10,
             name: "index",
             colours: {
                 foreground: "#000000",
@@ -85,7 +85,7 @@ app.controller('AppCtrl', ['$scope', '$timeout','mySharedService', 'socket', fun
             time: 10
         },
         {
-            order: 03,
+            order: 4,
             name: "mmmm",
             colours: {
                 foreground: "#171433",
@@ -94,7 +94,7 @@ app.controller('AppCtrl', ['$scope', '$timeout','mySharedService', 'socket', fun
             time: 20
         },
         {
-            order: 0,
+            order: 20,
             name: "latest_members",
             colours: {
                 foreground: "#f7811b",
