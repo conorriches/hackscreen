@@ -82,7 +82,7 @@ app.controller('AppCtrl', ['$scope', '$timeout', '$filter', 'mySharedService', '
                 foreground: "#FED74C",
                 background: "#333333"
             },
-            time: 10
+            time: 5
         },
         {
             order: 4,
@@ -100,7 +100,7 @@ app.controller('AppCtrl', ['$scope', '$timeout', '$filter', 'mySharedService', '
                 foreground: "#f7811b",
                 background: "#170062"
             },
-            time: 10
+            time: 20
         }
     ];
     $scope.currentScreenIndex = 1;
@@ -180,6 +180,29 @@ app.controller('AppCtrl', ['$scope', '$timeout', '$filter', 'mySharedService', '
         });
     };
 
+
+    $scope.memberEntered = function(member){
+        var now = $filter('date')(new Date(), "HH:mm");
+
+        if($scope.lastMembers.length > 5){
+            $scope.lastMembers.shift();
+        }
+
+        for(var i = 0 ; i < $scope.lastMembers.length ; i++){
+            if($scope.lastMembers[i].name === member){
+                //update member entry
+                $scope.lastMembers.splice(i,1);
+            }
+        }
+
+        $scope.lastMembers.push({
+            name : member,
+            date : now
+        });
+
+
+    };
+
     /**
      * NOTIFICATIONS HERE
      * When a new message arrives, deal with it.
@@ -190,11 +213,7 @@ app.controller('AppCtrl', ['$scope', '$timeout', '$filter', 'mySharedService', '
             switch(data.topic){
                 case 'door/outer/opened/username':
                     $scope.setNotification(data.message + " has entered!", NOTIF_WARN);
-                    var now = $filter('date')(new Date(), "yyyy-MM-dd HH:mm");
-                    $scope.lastMembers.push(data.message + " at " + now);
-                    if($scope.lastMembers.length > 5){
-                        $scope.lastMembers.shift();
-                    }
+                    $scope.memberEntered(data.message);
                     break;
                 case 'door/outer/doorbell':
                     $scope.setNotification("Doorbell! Doorbell!", NOTIF_DANGER);
