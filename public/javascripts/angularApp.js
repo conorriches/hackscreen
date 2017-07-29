@@ -45,6 +45,11 @@ app.config(['$httpProvider', function($httpProvider) {
 }
 ]);
 
+app.filter('reverse', function() {
+    return function(items) {
+        return items.slice().reverse();
+    };
+});
 
 app.controller('AppCtrl', ['$scope', '$timeout', '$filter', 'mySharedService', 'socket', function ($scope, $timeout, $filter, sharedService, socket) {
     $scope.screens = [

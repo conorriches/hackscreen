@@ -1,5 +1,5 @@
 <div ng-init="init(module)" class="latestmembers">
     <h1>Recent Visitors</h1>
     <hr/>
-    <li ng-repeat="n in lastMembers"><h3>{{n.name}} @ {{n.date}}</h3></li>
+    <h3 ng-repeat="n in lastMembers | reverse">{{n.name}} @ {{n.date}}</h3>
 </div>
