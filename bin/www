@@ -56,6 +56,18 @@ client.on('message', function (topic, message) {
         message : message.toString()
     });
 
+    var sys = require('sys')
+    var exec = require('child_process').exec;
+    function puts(error, stdout, stderr) { sys.puts(stdout) }
+
+    if(topic === '/door/outer/doorbell'){
+        exec("ogg123 ~/doorbell/audio/doorbell.ogg", puts);
+    }else if(topic === '/door/outer/opened/username'){
+        exec("ogg123 ~/doorbell/audio/outer_door_opened.ogg", puts);
+    }
+
+
+
 
 });
 
