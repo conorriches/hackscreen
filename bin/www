@@ -58,12 +58,18 @@ client.on('message', function (topic, message) {
 
     var sys = require('sys')
     var exec = require('child_process').exec;
-    function puts(error, stdout, stderr) { sys.puts(stdout) }
 
     if(topic === 'door/outer/doorbell'){
-        exec("ogg123 ~/doorbell/audio/doorbell.ogg", puts);
+        exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
+        exec("ogg123 ~/doorbell/audio/doorbell.ogg",   function puts(error, stdout, stderr) {
+            exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
+        });
+
     }else if(topic === 'door/outer/opened/username'){
-        exec("ogg123 ~/doorbell/audio/outer_door_opened.ogg", puts);
+        exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
+        exec("ogg123 ~/doorbell/audio/outer_door_opened.ogg",   function puts(error, stdout, stderr) {
+            exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
+        });
     }
 
 
