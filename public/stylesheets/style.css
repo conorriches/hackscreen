@@ -64,6 +64,7 @@ h3{
   transition: all 1s linear;
   border:1px solid black;
   font-family: "Droid Sans";
+  font-size:40px;
 }
 
 .notification .content{
