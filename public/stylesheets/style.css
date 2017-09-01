@@ -18,15 +18,19 @@ body{
 }
 
 h1{
-  font-size:70px;
+  font-size:110px;
 }
 
 h2{
-  font-size:50px;
+  font-size:90px;
+}
+
+h3{
+  font-size:40px;
 }
 
 .table{
-  font-size:30px;
+  font-size:60px;
 }
 
 .app{
@@ -101,6 +105,7 @@ h2{
   position:absolute;
   right:30px;
   bottom:30px;
+  font-size:30px;
   padding:10px;
   color:white;
   animation: example 100s infinite linear;

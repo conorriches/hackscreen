@@ -221,7 +221,7 @@ app.controller('AppCtrl', ['$scope', '$timeout', '$filter', 'mySharedService', '
                     $scope.memberEntered(data.message);
                     break;
                 case 'door/outer/doorbell':
-                    $scope.setNotification("Doorbell! Doorbell!", NOTIF_DANGER);
+                    $scope.setNotification("DOORBELL @ IRON DOORS", NOTIF_DANGER);
                     break;
                 case 'door/outer':
                     if(data.message === 'opened'){
