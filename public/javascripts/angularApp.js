@@ -106,7 +106,16 @@ app.controller('AppCtrl', ['$scope', '$timeout', '$filter', 'mySharedService', '
                 background: "#170062"
             },
             time: 20
-        }
+        },
+        {
+            order: 0,
+            name: "parrot",
+            colours: {
+                foreground: "#000000",
+                background: "#FFFFFF"
+            },
+            time: 2
+        },
     ];
     $scope.currentScreenIndex = 1;
     $scope.animationHide = false;
@@ -281,4 +290,9 @@ app.controller('TimeCtrl', ['$rootScope', '$scope', '$http', 'mySharedService', 
         $scope.date = new Date();
     });
 
+}]);
+
+
+app.controller('ParrotCtrl', ['$rootScope', '$scope', '$http', 'mySharedService', function ($rootScope, $scope, $http, sharedService) {
+    
 }]);

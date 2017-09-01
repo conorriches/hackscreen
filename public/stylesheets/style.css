@@ -9,6 +9,7 @@ html{
   height:100%;
   font-family: "Droid Sans";
   overflow: hidden;
+  font-size:20px;
 }
 
 body{
@@ -64,7 +65,7 @@ h3{
   transition: all 1s linear;
   border:1px solid black;
   font-family: "Droid Sans";
-  font-size:40px;
+  font-size:60px;
 }
 
 .notification .content{
@@ -123,9 +124,14 @@ h3{
     transform: rotate(0deg);
     bottom:0;
   }
+  25% {
+    transform: rotate(0deg);
+    right: 80px;
+    bottom:10px;
+  }
   50% {
     transform: rotate(-3deg);
-    bottom:100px;
+    bottom:200px;
   }
   100% {
     transform: rotate(0deg);
