@@ -65,7 +65,7 @@ client.on('message', function (topic, message) {
     exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.get_state\"}' http://172.16.0.20:6680/mopidy/rpc", function puts(error, stdout, stderr) {
       try{
         var json = JSON.parse(stdout);
-        if(json.result === "playing") isPlaying = true;
+        if(json.result == "playing") isPlaying = true;
       }catch(e){
 
       }
