@@ -117,6 +117,26 @@ h3{
 
 }
 
+.toiletDoorStatus{
+  background-color:red;
+  border-radius:90px;
+  padding:10px;
+  position:absolute;
+  right:390px;
+  bottom:90px;
+  
+  width:100px;
+  height:100px;
+  animation: example 110s infinite linear;
+
+  background-image: url('../images/lav.png');
+  background-size: 80% 80%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+
+
 
 @keyframes example {
   0% {
@@ -131,6 +151,27 @@ h3{
   50% {
     transform: rotate(-3deg);
     bottom:200px;
+  }
+  100% {
+    transform: rotate(0deg);
+    bottom:0;
+  }
+}
+
+
+@keyframes example2 {
+  0% {
+    transform: rotate(0deg);
+    bottom:0;
+  }
+  25% {
+    transform: rotate(0deg);
+    right: 380px;
+    bottom:50px;
+  }
+  50% {
+    transform: rotate(-3deg);
+    bottom:20px;
   }
   100% {
     transform: rotate(0deg);
@@ -163,6 +204,10 @@ h3{
   -webkit-animation: DoorOpenBgAnim 6s ease infinite;
   -moz-animation: DoorOpenBgAnim 6s ease infinite;
   animation: DoorOpenBgAnim 6s ease infinite;
+}
+
+.toiletDoorStatus.open{
+  background-color:limegreen;
 }
 
 .time{

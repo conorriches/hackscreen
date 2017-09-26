@@ -20,6 +20,7 @@
     "morgan": "~1.7.0",
     "mqtt": "^2.9.1",
     "raspberry-pi-mjpeg-server": "^1.0.0",
-    "serve-favicon": "~2.3.2"
+    "serve-favicon": "~2.3.2",
+    "socket.io": "^2.0.3"
   }
 }

@@ -127,6 +127,7 @@ app.controller('AppCtrl', ['$scope', '$timeout', '$filter', 'mySharedService', '
 
     $scope.doorStatus = false; //closed
     $scope.doorLeftOpenPromise;
+    $scope.toiletDoorStatus = true; //closed
 
     $scope.setNotification = function(content, level){
         $scope.notification = content;
@@ -194,6 +195,9 @@ app.controller('AppCtrl', ['$scope', '$timeout', '$filter', 'mySharedService', '
         });
     };
 
+    $scope.setToiletDoor = function(status){
+        $scope.toiletDoorStatus = !!status;
+    };
 
     $scope.memberEntered = function(member){
         var now = $filter('date')(new Date(), "HH:mm");
@@ -231,6 +235,9 @@ app.controller('AppCtrl', ['$scope', '$timeout', '$filter', 'mySharedService', '
                     break;
                 case 'door/outer/doorbell':
                     $scope.setNotification("DOORBELL @ IRON DOORS", NOTIF_DANGER);
+                    break;
+                case 'door/toilet':
+                    $scope.setToiletDoor(data.message == "opened");
                     break;
                 case 'door/outer':
                     if(data.message === 'opened'){
