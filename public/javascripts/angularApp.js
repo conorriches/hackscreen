@@ -239,7 +239,7 @@ app.controller('AppCtrl', ['$scope', '$timeout', '$filter', 'mySharedService', '
                 case 'door/toilet':
                     $scope.setToiletDoor(data.message == "opened");
                     break;
-                case 'door/outer':
+                case 'door/outer/state':
                     if(data.message === 'opened'){
                         $scope.setDoor(true);
                         $scope.doorLeftOpenPromise = $timeout(function(){
