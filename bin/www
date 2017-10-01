@@ -43,10 +43,10 @@ const mqtt = require('mqtt');
 const client = mqtt.connect('mqtt://172.16.0.5');
 
 client.on('connect', function(state){
-    client.subscribe('/door/outer/state');
-    client.subscribe('/door/toilet');
-    client.subscribe('/door/outer/opened/username');
-    client.subscribe('/door/outer/doorbell');
+    client.subscribe('door/outer/state');
+    client.subscribe('door/toilet');
+    client.subscribe('door/outer/opened/username');
+    client.subscribe('door/outer/doorbell');
 });
 
 
