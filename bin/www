@@ -83,6 +83,12 @@ client.on('message', function (topic, message) {
         exec("ogg123 ~/doorbell/audio/outer_door_opened.ogg",   function puts(error, stdout, stderr) {
             if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
         });
+      }else if(topic === 'door/outer/aux'){
+        exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
+        exec("mpg123 ~/doorbell/audio/Antiques.mpg",   function puts(error, stdout, stderr) {
+            if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
+        });
+
       }
 
 
