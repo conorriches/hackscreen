@@ -251,7 +251,15 @@ app.controller('AppCtrl', ['$scope', '$timeout', '$filter', 'mySharedService', '
                     }
                     break;
                 case 'button/big/red/state':
-                    $scope.setNotification("DON'T TOUCH MY BUTTON!", NOTIF_DANGER);
+                    var n = Math.floor(Math.random() * (10 + 1));
+                    if(n < 4){
+                        $scope.setNotification("DON'T BUSH MY BUTTON!", NOTIF_DANGER);
+                    }else if( n < 7){
+                        $scope.setNotification("DO NOT DO THAT AGAIN FUCKO", NOTIF_DANGER);
+                    }else{
+                        $scope.setNotification("This is Fiona Bruce. Shove it.", NOTIF_DANGER);
+                    }
+                    
                     break;
                 default:
 
