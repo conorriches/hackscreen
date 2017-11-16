@@ -45,6 +45,7 @@ const client = mqtt.connect('mqtt://172.16.0.5');
 client.on('connect', function(state){
     client.subscribe('door/outer/state');
     client.subscribe('door/toilet');
+    client.subscribe('button/big/red/state');
     client.subscribe('door/outer/opened/username');
     client.subscribe('door/outer/doorbell');
     client.subscribe('door/outer/aux');
@@ -96,6 +97,40 @@ client.on('message', function (topic, message) {
             if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
         });
 
+      }else if(topic == 'button/big/red/state'){
+        var rnd = randomInt(0,100);
+        if(rnd > 20){
+          exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
+          exec("mpg123 ~/doorbell/audio/bikeshed.mp3",   function puts(error, stdout, stderr) {
+              if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
+          });
+        }else if(rnd > 15){
+          exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
+          exec("mpg123 ~/doorbell/audio/Antiques.mp3",   function puts(error, stdout, stderr) {
+              if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
+          });
+        }else if(rnd > 10){
+          exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
+          exec("mpg123 ~/doorbell/audio/THX.mp3",   function puts(error, stdout, stderr) {
+              if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
+          });
+        }else if(rnd > 4){
+          exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
+          exec("ogg123 ~/doorbell/audio/WIlhelp_Scream.ogg",   function puts(error, stdout, stderr) {
+              if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
+          }); 
+        }else if(rnd > 2){
+          exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
+          exec("mpg123 ~/doorbell/audio/yamaha.mp3",   function puts(error, stdout, stderr) {
+              if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
+          });
+        }else{
+          //FUCK SHIT UP
+          exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
+          exec("ogg123 ~/doorbell/audio/ipenema.flac",   function puts(error, stdout, stderr) {
+              if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
+          }); 
+        }
       }
 
 
@@ -103,6 +138,10 @@ client.on('message', function (topic, message) {
 
 });
 
+
+function randomInt (low, high) {
+  return Math.floor(Math.random() * (high - low) + low);
+}
 
 /**
  * Normalize a port into a number, string, or false.

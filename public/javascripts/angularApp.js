@@ -250,6 +250,9 @@ app.controller('AppCtrl', ['$scope', '$timeout', '$filter', 'mySharedService', '
                         $scope.setDoor(false);
                     }
                     break;
+                case 'button/big/red/state':
+                    $scope.setNotification("DON'T TOUCH MY BUTTON!", NOTIF_DANGER);
+                    break;
                 default:
 
             }
