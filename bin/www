@@ -111,7 +111,7 @@ client.on('message', function (topic, message) {
           });
         }else if(rnd > 60){
           exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
-          exec("mpg123 ~/doorbell/audio/chicago-tornado-siren.mp3",   function puts(error, stdout, stderr) {
+          exec("mpg123 ~/doorbell/audio/homer.mp3",   function puts(error, stdout, stderr) {
               if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
           });
         }else if(rnd > 40){
@@ -119,7 +119,7 @@ client.on('message', function (topic, message) {
           exec("mpg123 ~/doorbell/audio/dixie.mp3",   function puts(error, stdout, stderr) {
               if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
           });
-        }else if(rnd > 15){
+        }else if(rnd > 20){
           exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
           exec("mpg123 ~/doorbell/audio/Antiques.mp3",   function puts(error, stdout, stderr) {
               if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
