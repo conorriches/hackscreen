@@ -99,9 +99,24 @@ client.on('message', function (topic, message) {
 
       }else if(topic == 'button/big/red/state'){
         var rnd = randomInt(0,100);
-        if(rnd > 20){
+        if(rnd > 98){
           exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
-          exec("mpg123 ~/doorbell/audio/bikeshed.mp3",   function puts(error, stdout, stderr) {
+          exec("mpg123 ~/doorbell/audio/profanity.mp3",   function puts(error, stdout, stderr) {
+              if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
+          });
+        }else if(rnd > 80){
+          exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
+          exec("mpg123 ~/doorbell/audio/AirHorn.mp3",   function puts(error, stdout, stderr) {
+              if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
+          });
+        }else if(rnd > 60){
+          exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
+          exec("mpg123 ~/doorbell/audio/chicago-tornado-siren.mp3",   function puts(error, stdout, stderr) {
+              if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
+          });
+        }else if(rnd > 40){
+          exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
+          exec("mpg123 ~/doorbell/audio/dixie.mp3",   function puts(error, stdout, stderr) {
               if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
           });
         }else if(rnd > 15){
