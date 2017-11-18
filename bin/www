@@ -99,7 +99,7 @@ client.on('message', function (topic, message) {
 
       }else if(topic == 'button/big/red/state'){
         var rnd = randomInt(0,100);
-        if(rnd > 98){
+        if(rnd > 90){
           exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
           exec("mpg123 ~/doorbell/audio/profanity.mp3",   function puts(error, stdout, stderr) {
               if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
@@ -109,9 +109,19 @@ client.on('message', function (topic, message) {
           exec("mpg123 ~/doorbell/audio/AirHorn.mp3",   function puts(error, stdout, stderr) {
               if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
           });
-        }else if(rnd > 60){
+        }else if(rnd > 70){
           exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
           exec("mpg123 ~/doorbell/audio/homer.mp3",   function puts(error, stdout, stderr) {
+              if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
+          });
+        }else if(rnd > 60){
+          exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
+          exec("mpg123 ~/doorbell/audio/homer-boogey.mp3",   function puts(error, stdout, stderr) {
+              if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
+          });
+        }else if(rnd > 50){
+          exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.pause\"}' http://172.16.0.20:6680/mopidy/rpc");
+          exec("mpg123 ~/doorbell/audio/bart-aye.mp3",   function puts(error, stdout, stderr) {
               if(isPlaying) exec("curl -d '{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"core.playback.play\"}' http://172.16.0.20:6680/mopidy/rpc");
           });
         }else if(rnd > 40){
