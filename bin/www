@@ -124,16 +124,26 @@ client.on("message", function(topic, message) {
         });
       } else if (topic == "button/big/red/state") {
 
+        var vol = 30;
+        //get the volume of the music
+        exec(
+          'curl -d \'{"jsonrpc": "2.0", "id": 1, "method": "core.playback.get_volume"}\' http://172.16.0.20:6680/mopidy/rpc',
+          function puts(error, stdout, stderr) {
+            try {
+              var json = JSON.parse(stdout);
+              vol = Number(json.result);
+            } catch (e) {}
+          }
+        );
         //Reduce the volume
-        exec("amixer sset 'PCM' 70%", function puts(error, stdout, stderr) {
-
+        exec("amixer sset 'PCM' " + (vol * 0.7) + "%", function puts(error, stdout, stderr) {
           //Pause the music
           exec(
             'curl -d \'{"jsonrpc": "2.0", "id": 1, "method": "core.playback.pause"}\' http://172.16.0.20:6680/mopidy/rpc',
             function puts(error, stdout, stderr) {
               var rnd = randomInt(0, 100);
               var audioCmd = "";
-              
+
               //decide what annoyance we want
               switch (true) {
                 case rnd > 90:
@@ -170,12 +180,15 @@ client.on("message", function(topic, message) {
                   audioCmd = "ogg123 ~/doorbell/audio/ipenema.flac";
                   break;
               }
-  
+
               //play the annoyance
               exec(audioCmd, function puts(error, stdout, stderr) {
-
                 //reset volume
-                exec("amixer sset 'PCM' 100%", function puts(error, stdout, stderr) {});
+                exec("amixer sset 'PCM' 100%", function puts(
+                  error,
+                  stdout,
+                  stderr
+                ) {});
 
                 //resume if we need to
                 if (isPlaying)
@@ -183,12 +196,10 @@ client.on("message", function(topic, message) {
                     'curl -d \'{"jsonrpc": "2.0", "id": 1, "method": "core.playback.play"}\' http://172.16.0.20:6680/mopidy/rpc'
                   );
               });
-
             }
           );
         });
       }
-
     }
   );
 });
