@@ -124,19 +124,12 @@ client.on("message", function(topic, message) {
         });
       } else if (topic == "button/big/red/state") {
 
-        var vol = 30;
-        //get the volume of the music
-        exec(
-          'curl -d \'{"jsonrpc": "2.0", "id": 1, "method": "core.playback.get_volume"}\' http://172.16.0.20:6680/mopidy/rpc',
-          function puts(error, stdout, stderr) {
-            try {
-              var json = JSON.parse(stdout);
-              vol = Number(json.result);
-            } catch (e) {}
-          }
-        );
         //Reduce the volume
-        exec("amixer sset 'PCM' " + (vol * 0.7) + "%", function puts(error, stdout, stderr) {
+        exec("amixer sset 'PCM' 90%", function puts(
+          error,
+          stdout,
+          stderr
+        ) {
           //Pause the music
           exec(
             'curl -d \'{"jsonrpc": "2.0", "id": 1, "method": "core.playback.pause"}\' http://172.16.0.20:6680/mopidy/rpc',
@@ -158,6 +151,9 @@ client.on("message", function(topic, message) {
                 case rnd > 60:
                   audioCmd = "mpg123 ~/doorbell/audio/homer-boogey.mp3";
                   break;
+                case rnc > 50:
+                  audioCmd = "mpg123 ~/doorbell/audio/will.mp3";
+                  break;
                 case rnd > 40:
                   audioCmd = "mpg123 ~/doorbell/audio/bart-aye.mp3";
                   break;
@@ -174,7 +170,7 @@ client.on("message", function(topic, message) {
                   audioCmd = "ogg123 ~/doorbell/audio/WIlhelp_Scream.ogg";
                   break;
                 case rnd > 2:
-                  audioFIle = "mpg123 ~/doorbell/audio/yamaha.mp3";
+                  audioCmd = "mpg123 ~/doorbell/audio/yamaha.mp3";
                   break;
                 default:
                   audioCmd = "ogg123 ~/doorbell/audio/ipenema.flac";
