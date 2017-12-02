@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Droid+Sans|Artifika|Zilla+Slab|Chela+One');
+@import url('https://fonts.googleapis.com/css?family=Droid+Sans|Artifika|Zilla+Slab|Dosis');
 @font-face {
   font-family: metrolink;
   src: url(/fonts/PantographSans-Regular.ttf);
@@ -232,7 +232,7 @@ h3{
 }
 
 .events{
-  font-family: "Chela One";
+  font-family: "Dosis";
 
 }
 

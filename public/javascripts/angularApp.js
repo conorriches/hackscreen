@@ -63,7 +63,7 @@ app.controller("AppCtrl", [
   function($scope, $timeout, $filter, sharedService, socket) {
     $scope.screens = [
       {
-        order: -2,
+        order: 7,
         name: "events",
         colours: {
           foreground: "#008",
@@ -114,7 +114,7 @@ app.controller("AppCtrl", [
           foreground: "#FED74C",
           background: "#333333"
         },
-        time: 5
+        time: 15
       },
       {
         order: 4,
