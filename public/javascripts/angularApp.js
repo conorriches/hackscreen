@@ -81,6 +81,16 @@ app.controller("AppCtrl", [
         time: 15
       },
       {
+        order: 3,
+        name: “music”,
+        colours: {
+          foreground: "#bd08fe",
+          background: "#141b33"
+        },
+        time: 15
+      },
+
+      {
         order: 11,
         name: "wifi",
         colours: {
